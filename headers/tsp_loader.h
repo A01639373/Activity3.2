@@ -1,24 +1,15 @@
 #ifndef TSP_LOADER_H
 #define TSP_LOADER_H
 
+#include "tsp_struct.h"
 #include <iostream>
 #include <fstream>
-#include <vector>
-#include <cmath>
 #include <sstream>
+#include <vector>
 #include <string>
+#include <stdexcept>
 
 using namespace std;
-
-struct City {
-    int x, y;
-};
-
-int euclidean(const City& a, const City& b) {
-    int dx = a.x - b.x;
-    int dy = a.y - b.y;
-    return sqrt(dx * dx + dy * dy);
-}
 
 vector<City> loadTSP(const string& filename) {
     ifstream file(filename);
