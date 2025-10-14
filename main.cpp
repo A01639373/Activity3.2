@@ -5,7 +5,7 @@
 #include <iomanip>
 #include "./headers/tsp_loader.h"
 #include "./headers/NN.h"
-//#include "./headers/CheapestLink.h"
+#include "./headers/CheapestLink.h"
 //#include "./headers/MST.h"
 
 using namespace std;
