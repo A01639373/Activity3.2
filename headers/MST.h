@@ -2,11 +2,16 @@
 #define MST_H
 
 #include "MST.h"
+#include "tsp_struct.h"
+#include "tsp_loader.h"
 #include <algorithm>
 #include <iostream>
 #include <queue>
 #include <vector>
 using namespace std;
+
+// DistGraph - weight
+// BuildEdges - list of edges
 
 // Function to find sum of weights of edges of the Minimum Spanning Tree.
 int spanningTree(int V, int E, vector<vector<int>> &edges)
