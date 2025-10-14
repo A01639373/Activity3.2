@@ -7,9 +7,9 @@ struct City {
     double x, y;
 };
 
-int euclidean(const City& a, const City& b) {
-    int dx = a.x - b.x;
-    int dy = a.y - b.y;
+double euclidean(const City& a, const City& b) {
+    double dx = a.x - b.x;
+    double dy = a.y - b.y;
     return sqrt(dx * dx + dy * dy);
 }
 
