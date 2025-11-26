@@ -2,6 +2,9 @@
 #define TSP_STRUCT_H
 
 #include <cmath>
+#include <vector>
+
+using namespace std;
 
 struct City {
     double x, y;

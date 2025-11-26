@@ -48,7 +48,7 @@ int main(){
 
     cout << fixed << setprecision(0);
     cout << "Nearest Neighbor: " << NearestNeighbor(cities) << endl;
-    //cout << "Cheapest Link: " << CheapestLink(cities) << endl;
+    cout << "Cheapest Link: " << CheapestLink(cities) << endl;
     //cout << "Minimum Spanning Tree: " << MST(cities) << endl;
 
 
