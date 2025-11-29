@@ -6,7 +6,7 @@
 #include "./headers/tsp_loader.h"
 #include "./headers/NN.h"
 #include "./headers/CheapestLink.h"
-//#include "./headers/MST.h"
+#include "./headers/MST.h"
 
 using namespace std;
 
@@ -49,7 +49,7 @@ int main(){
     cout << fixed << setprecision(0);
     cout << "Nearest Neighbor: " << NearestNeighbor(cities) << endl;
     cout << "Cheapest Link: " << CheapestLink(cities) << endl;
-    //cout << "Minimum Spanning Tree: " << MST(cities) << endl;
+    cout << "Minimum Spanning Tree: " << kruskalsMST(number_of_cities, cities) << endl;
 
 
     return 0;

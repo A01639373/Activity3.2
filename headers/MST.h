@@ -10,67 +10,59 @@
 #include <vector>
 using namespace std;
 
-// DistGraph - weight
-// BuildEdges - list of edges
+// Disjoint set data struture
+class DSU {
+    vector<int> parent, rank;
 
-// Function to find sum of weights of edges of the Minimum Spanning Tree.
-int spanningTree(int V, int E, vector<vector<int>> &edges)
-{
-
-    // Create an adjacency list representation of the graph
-    vector<vector<int>> adj[V];
-
-    // Fill the adjacency list with edges and their weights
-    for (int i = 0; i < E; i++)
-    {
-        int u = edges[i][0];
-        int v = edges[i][1];
-        int wt = edges[i][2];
-        adj[u].push_back({v, wt});
-        adj[v].push_back({u, wt});
-    }
-
-    // Create a priority queue to store edges with their weights
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-
-    // Create a visited array to keep track of visited vertices
-    vector<bool> visited(V, false);
-
-    // Variable to store the result (sum of edge weights)
-    int res = 0;
-
-    // Start with vertex 0
-    pq.push({0, 0});
-
-    // Perform Prim's algorithm to find the Minimum Spanning Tree
-    while (!pq.empty())
-    {
-        auto p = pq.top();
-        pq.pop();
-
-        int wt = p.first; // Weight of the edge
-        int u = p.second; // Vertex connected to the edge
-
-        if (visited[u] == true)
-        {
-            continue; // Skip if the vertex is already visited
-        }
-
-        res += wt;         // Add the edge weight to the result
-        visited[u] = true; // Mark the vertex as visited
-
-        // Explore the adjacent vertices
-        for (auto v : adj[u])
-        {
-            // v[0] represents the vertex and v[1] represents the edge weight
-            if (visited[v[0]] == false)
-            {
-                pq.push({v[1], v[0]}); // Add the adjacent edge to the priority queue
-            }
+public:
+    DSU(int n) {
+        parent.resize(n);
+        rank.resize(n);
+        for (int i = 0; i < n; i++) {
+            parent[i] = i;
+            rank[i] = 1;
         }
     }
 
-    return res; // Return the sum of edge weights of the Minimum Spanning Tree
+    int find(int i) {
+        return (parent[i] == i) ? i : (parent[i] = find(parent[i]));
+    }
+
+    void unite(int x, int y) {
+        int s1 = find(x), s2 = find(y);
+        if (s1 != s2) {
+            if (rank[s1] < rank[s2]) parent[s1] = s2;
+            else if (rank[s1] > rank[s2]) parent[s2] = s1;
+            else parent[s2] = s1, rank[s1]++;
+        }
+    }
+};
+bool comparator(vector<int> &a,vector<int> &b){
+   return a[2] < b[2]; 
+}
+
+
+int kruskalsMST(int number_of_cities, const vector<City>& cities) {
+    
+    // distance matrix, time and space complexity O(n^2)
+    vector<vector<int>> distances = DistGraph(cities);
+
+    //build edges, O(n^2)
+    vector<Edge> edges = BuildEdges(distances, number_of_cities);
+    
+    // Traverse edges in sorted order
+    DSU dsu(number_of_cities);
+    int cost = 0, count = 0;
+    
+    for (auto &e : edges) {
+
+        if (dsu.find(e.a) != dsu.find(e.b)) {
+            dsu.unite(e.a, e.b);
+            cost += e.distance;
+            if (++count == number_of_cities - 1) break;
+        }
+    }
+    return cost;
 }
 
 #endif

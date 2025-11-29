@@ -98,6 +98,7 @@
     "variant": "cpp",
     "queue": "cpp",
     "xstring": "cpp",
-    "xutility": "cpp"
+    "xutility": "cpp",
+    "text_encoding": "cpp"
   }
 }
