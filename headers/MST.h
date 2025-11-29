@@ -45,7 +45,7 @@ bool comparator(vector<int> &a,vector<int> &b){
 int kruskalsMST(int number_of_cities, const vector<City>& cities) {
     
     // distance matrix, time and space complexity O(n^2)
-    vector<vector<int>> distances = DistGraph(cities);
+    vector<vector<double>> distances = DistGraph(cities);
 
     //build edges, O(n^2)
     vector<Edge> edges = BuildEdges(distances, number_of_cities);
