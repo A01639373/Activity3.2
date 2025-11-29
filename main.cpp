@@ -29,13 +29,14 @@ int main(){
 
     // funcion random de n ciudades para guardarlas en cities no repetidas
     vector<int> unique_n(total_cities.size());
-    for(int i = 0; i <= total_cities.size(); ++i){
+    for(int i = 0; i < total_cities.size(); ++i){
         unique_n[i] = i;
     }
 
     random_device rd;
     mt19937 gen(rd());
-    for (int i = 0; i < number_of_cities; ++i) {
+
+    for(int i = 0; i < number_of_cities; ++i){
         uniform_int_distribution<> dis(i, total_cities.size() - 1);
         int j = dis(gen);
         swap(unique_n[i], unique_n[j]);

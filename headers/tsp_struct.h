@@ -26,41 +26,30 @@ double euclidean(const City& a, const City& b) {
     return sqrt(dx * dx + dy * dy);
 }
 
-vector<vector<int>> DistGraph(const vector<City>& cities){
+vector<vector<double>> DistGraph(const vector<City>& cities){
     int n = cities.size();
+    vector<vector<double>> distances(n, vector<double>(n)); // n x n
 
-    // distance matrix, time and space complexity O(n^2)
-    vector<vector<int>> distances(n - 1, vector<int>(n - 1));
     for(int i=0; i<n; i++){
-        for(int j = 0; j<n; j++){
+        for(int j=0; j<n; j++){
             if(i == j){
-                distances[i][j] = 0;
-            }else{
+                distances[i][j] = 0.0;
+            } else {
                 distances[i][j] = euclidean(cities[i], cities[j]);
             }
         }
     }
-
     return distances;
 }
 
-vector<Edge> BuildEdges(const vector<vector<int>>& distances, int n){
+vector<Edge> BuildEdges(const vector<vector<double>>& distances, int n){
     vector<Edge> edges;
-
-    //build edges, O(n^2)
-    for (int i = 0; i < n; i++) {
-        for (int j = i + 1; j < n; j++) { 
-            Edge e;
-            e.a = i;
-            e.b = j;
-            e.distance = distances[i][j];
-            edges.push_back(e);
+    for(int i = 0; i < n; i++){
+        for(int j = i+1; j < n; j++){
+            edges.push_back(Edge{i, j, distances[i][j]});
         }
     }
-
-    //O(nlogn)
     sort(edges.begin(), edges.end());
-
     return edges;
 }
 
